@@ -13,3 +13,6 @@ print 'u2 repr',repr(u2)# u'\u6c49'
 # s2 = u.decode('UTF-8')
 # 同样，对str进行编码也是错误的
 # u2 = s.encode('UTF-8')
+
+something=raw_input('input something:')
+print something
