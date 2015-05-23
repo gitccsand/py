@@ -1,4 +1,4 @@
-# -*- coding: gbk -*-
+# -*- coding: utf-8 -*-
 names = ['Michael', 'Bob', 'Tracy']
 
 print 'names:'
@@ -17,7 +17,6 @@ names.append('Tracy')
 for name in names:
     print name
 print
-
 
 print 'names insert 2:'
 names.insert(2,'Jack')
@@ -38,7 +37,7 @@ for x in range(11):
 print sum
 print
 
-#100ÒÔÄÚÆæÊýºÍ
+#100ä»¥å†…å¥‡æ•°å’Œ
 sum = 0
 n = 99
 while n > 0:
@@ -47,7 +46,10 @@ while n > 0:
 print sum
 print
 
-##ËÀÑ­»·
+##æ­»å¾ªçŽ¯
 while True:
-    something = raw_input('´ó¼ÒºÃ,ÊäÈëÒ»Ð©×Ö·û:')
-    print something.decode('gbk').encode('gbk')
+    something = raw_input(u'å¤§å®¶å¥½,è¾“å…¥ä¸€äº›å­—ç¬¦:'.encode('gbk'))
+    print something
+##    print something.decode('gbk').encode('gbk')
+    if something=='0':
+        exit()

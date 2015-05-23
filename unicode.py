@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 print '\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
-print 'ÖÐÎÄ'
-print u'ÖÐ'.encode('utf-8')
+print 'ä¸­æ–‡'
+print u'ä¸­'.encode('utf-8')
