@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 
 def Ytriangle1():
-    l=[]
+    L=[]
     while True:
         
-        if len(l)<=1:
-            l.append(1)        
+        if len(L)<=1:
+            L.append(1)        
         else:
-            m=[l[i]+l[i+1] for i in range(len(l)-1)]
-            l=[1]+m+[1]
+            m=[L[i]+L[i+1] for i in range(len(L)-1)]
+            L=[1]+m+[1]
             
-        yield l
+        yield L
 
-def Ytriangle():
-    l=[1]
+def Ytriangle2():
+    L=[1]
     while True:
-        yield l
-        l=[1]+[l[i]+l[i+1] for i in range(len(l)-1)]+[1]
+        yield L
+        L=[1]+[L[i]+L[i+1] for i in range(len(L)-1)]+[1]
             
         
 
-Y=Ytriangle()
+Y=Ytriangle2()
 
 for n in range(10):
     print(next(Y))
