@@ -4,6 +4,7 @@
 .settings
 *.rar
 *.zip
+*.pyc
 #directory
 WebContent/WEB-INF/lib
 gettingStarted/getZkUp/WebContent/WEB-INF/lib
