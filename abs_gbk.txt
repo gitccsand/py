@@ -14,7 +14,7 @@ def my_abs1(x):
         my_abx(x)
 
 
-n = int(input('è¾“å…¥ï¼š'))
+n = int(input('ÊäÈë£º'))
 print (my_abs(n))
 
 print (my_abs1('asd'))
