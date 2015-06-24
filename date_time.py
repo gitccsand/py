@@ -8,22 +8,8 @@ from datetime import datetime
 
 now=datetime.now()
 print(now)
-type(now)
+print(type(now))
+print(now.timestamp())
 
 if __name__=='__main__':
-##    main()
-    
-
-
-
-    
-    
-
-
-    
-
-        
-        
-    
-        
-        
+    main()
