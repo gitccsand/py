@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/autocheckform.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/checkform.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/common.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/common_003.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/flow.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/jquery-1.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		//自定义$.browser方法
+		//jQuery 1.9以上版本去掉 $.browser 
+		var userAgent = navigator.userAgent.toLowerCase();
+		jQuery.browser = {
+			version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [0,'0'])[1],
+			safari: /webkit/.test( userAgent ),
+			opera: /opera/.test( userAgent ),
+			msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ),
+			mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+		};
+		</script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/loading_002.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/eventKey.js" type="text/javascript"></script>
+		<script src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/WdatePicker.js" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/WdatePicker.css">
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/loading.js"></script>
+		<script type="text/javascript">
+			showGifLoading('/images/loader.gif');
+			closeGifLoading();
+		</script>
+
+<link href="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/jbox.css" rel="stylesheet">
+<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/jbox_002.js"></script>
+<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/jbox.js"></script>
+<script language="javascript" type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/jquery.js"></script>
+
+ 
+
+	
+		<title>已办列表</title>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/flowRead_list.js" charset="utf-8"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/gongwen.js" charset="utf-8"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/wasteBoxDwr.js"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/gongwenCommon.js"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/engine.js"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/util.js"></script>
+		<script type="text/javascript" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/common_002.js" charset="utf-8"></script>
+		<link href="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="content">
+		<div class="rightinfo">
+		<div class="query-title">
+			<table width="100%">
+				<tbody><tr>
+					<td style="font-size:14px;" align="left">&nbsp;&nbsp;查&nbsp;&nbsp;询</td>
+					<td align="right" width="10%"><img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/zhedie_02.png" height="22px" width="35px"></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<form id="frm" name="frm" action="/archives/gongwenCommonAction!doList.action" method="post">
+		<input name="queryCondition.gongwenType" value="SW" id="gongwenType" type="hidden">
+	    <input name="userSession.orgId" value="008" id="curOrgId" type="hidden">
+	    <input name="userSession.userID" value="3441AA100000000000SD" id="curUserId" type="hidden">
+	    <!-- 排序用 -->
+	    <input name="queryCondition.cells" value="0" id="cells" type="hidden">
+		<input name="queryCondition.orderBy" value=" order by a.readtime " id="orderBy" type="hidden">
+		<input name="queryCondition.orderAD" value="desc" id="orderAD" type="hidden">
+		<!-- 为了传阅选择人的时候，才设的隐含域开始 -->
+		<input id="userid" name="userid" value="" type="hidden">
+		<input id="username" name="username" value="" type="hidden">
+		<input id="userdeptid" name="userdeptid" value="" type="hidden">
+		<input id="userdeptname" name="userdeptname" value="" type="hidden">
+		<input id="remindField" name="remindField" value="" type="hidden">
+	    <!-- 为了传阅选择人的时候，才设的隐含域结束 -->
+		<table class="query">
+			<tbody><tr>
+				<td class="query-label">
+					标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：
+				</td>
+				<td class="titletdright" align="left" width="35%">
+					&nbsp;<input name="queryCondition.title" maxlength="200" id="title" class="query-input" style="width: 58%" type="text">
+				</td>
+				<td class="query-label">
+					流&nbsp;程&nbsp;类&nbsp;型：
+				</td>
+				<td class="titletdright">
+					&nbsp;
+					<select name="queryCondition.flowTypeId" id="flowTypeId" class="query-select" style="width: 70%">
+    <option selected="selected" value="">--请选择--</option>
+    <option value="090205102403580">吉林省分公司部室收文</option>
+    <option value="081218161146808">吉林省分公司收文</option>
+
+
+</select>
+
+				</td>
+			</tr>
+			 
+			<tr>
+			
+            
+                <td class="query-label">
+                                                文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+                </td>
+            
+                <td class="titletdright" align="left">
+                   &nbsp;<input name="queryCondition.code" maxlength="200" id="code" class="query-input" style="width: 58%" type="text">
+                </td>
+				<td class="query-label">
+					是&nbsp;否&nbsp;内&nbsp;控：
+				</td>  
+				<td class="titletdright" align="left">
+					&nbsp;
+					<select name="queryCondition.internalControl" id="internalControl" class="query-select" style="width: 70%">
+    <option selected="selected" value="">--请选择--</option>
+    <option value="1">是</option>
+    <option value="0">否</option>
+
+
+</select>
+
+				</td>
+			</tr>
+			<tr>
+				<td class="query-label">
+					操&nbsp;作&nbsp;日&nbsp;期：
+				</td>
+				<td class="titletdright" colspan="3" align="left" width="35%">
+					&nbsp;从
+					<input id="queryCondition.beginTime" name="queryCondition.beginTime" class="inputtext" style="width: 30%" readonly="readonly" value="2015-07-21" type="text">
+					<img style="cursor: pointer" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/datetime.gif" onclick="WdatePicker({el:$dp.$('queryCondition.beginTime'),maxDate:'#F{$dp.$D(\'queryCondition.endTime\')}'})" height="16" width="16">
+					至
+					<input id="queryCondition.endTime" name="queryCondition.endTime" class="inputtext" style="width: 30%" readonly="readonly" type="text">
+					<img style="cursor: pointer" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/datetime.gif" onclick="WdatePicker({el:$dp.$('queryCondition.endTime'),minDate:'#F{$dp.$D(\'queryCondition.beginTime\')}'})" height="16" width="16">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<input class="query-button" value="查  询" id="findbutton" type="button">
+					<input class="query-button" value="清  空" id="cleanMeetState" type="button">
+				</td>
+			</tr>
+	    </tbody></table>
+			<div class="header">
+				<div class="listtitle">&nbsp;&nbsp;
+				
+				收文已办列表
+				
+				
+				</div>
+				<div class="tools">
+					<ul class="toolbar">
+						<li id="openFill"><span></span>移至文件柜</li>
+						<li id="cy"><span></span>传阅</li>
+						<li id="clearcy"><span></span>撤销传阅</li>
+						<li id="takeBack"><span></span>收回</li>
+						<li id="moveBox"><span></span>移至废件箱</li>
+					</ul>
+				</div>
+			</div>
+			<table id="listtable" class="tablelist">
+				<tbody><tr class="tablelist-title">
+			        <td align="center" width="3%">
+						序号
+					</td>
+				    <td width="4%">
+					   &nbsp;
+				    </td>
+					<td style="cursor: pointer" onclick="orderField(2,' order by a.filetypeid ');" width="10%">
+						流程类型
+					</td>
+					<td style="cursor: pointer" onclick="orderField(3,' order by a.title ');" width="18%">
+						标题
+					</td>
+					
+                    
+                           <td style="cursor: pointer" onclick="orderField(4,' order by a.para ');" width="10%">
+                                                                                文号
+                           </td>
+                    
+					<td style="cursor: pointer" onclick="orderField(5,' order by a.readtime ');" width="10%">
+						 处理日期
+					</td>
+					<td style="word-break:keep-all;" width="12%">
+						当前状态
+					</td>
+					<td width="4%">
+						全选<input name="select" id="select" value="checkbox" onclick="selectAllCheckBox(document.frm.flowReadId,document.frm.select,this);" type="checkbox">
+					</td>
+			    </tr>
+			    
+				
+					<tr class="odd" id="15080687111046479839" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15080585091143567026">
+					
+					<td>
+						1
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="关于召开全国邮政企业信息网安全运行电视电话会议的通知" id="title" type="hidden">
+					    <input name="recordid" value="15080585091143567026" id="recordid" type="hidden">
+					    <input name="filetypeid" value="081218161146808" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司收文
+					</td>
+					
+					<td>
+						关于召开全国邮政企业信息网安全运行电视电话会议的通知
+					</td>
+					
+					<td>
+				       信建传〔2015〕36号
+					</td>
+					
+					<td>
+					    2015-08-06 10:46:47
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15080687111046479839" type="checkbox">
+						<input name="recordid" value="15080585091143567026" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="081218161146808" id="rfiletypeid" type="hidden">
+					    <input name="title" value="关于召开全国邮政企业信息网安全运行电视电话会议的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+					<tr id="15072987141717561108" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15072983080854105454">
+					
+					<td>
+						2
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="关于印发《中国邮政集团公司吉林省分公司用户欠费考核办法（试行）》的通知" id="title" type="hidden">
+					    <input name="recordid" value="15072983080854105454" id="recordid" type="hidden">
+					    <input name="filetypeid" value="090205102403580" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司部室收文
+					</td>
+					
+					<td>
+						关于印发《中国邮政集团公司吉林省分公司用户欠费考核办法（试行）》的通知
+					</td>
+					
+					<td>
+				       吉邮分〔2015〕104号
+					</td>
+					
+					<td>
+					    2015-07-29 17:17:56
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室相关人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15072987141717561108" type="checkbox">
+						<input name="recordid" value="15072983080854105454" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="090205102403580" id="rfiletypeid" type="hidden">
+					    <input name="title" value="关于印发《中国邮政集团公司吉林省分公司用户欠费考核办法（试行）》的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+					<tr class="odd" id="15072984121716584831" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15072987100854387192">
+					
+					<td>
+						3
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="关于下发中国邮政集团公司吉林省分公司机关差旅费管理办法的通知" id="title" type="hidden">
+					    <input name="recordid" value="15072987100854387192" id="recordid" type="hidden">
+					    <input name="filetypeid" value="090205102403580" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司部室收文
+					</td>
+					
+					<td>
+						关于下发中国邮政集团公司吉林省分公司机关差旅费管理办法的通知
+					</td>
+					
+					<td>
+				       吉邮分〔2015〕105号
+					</td>
+					
+					<td>
+					    2015-07-29 17:16:58
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室相关人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15072984121716584831" type="checkbox">
+						<input name="recordid" value="15072987100854387192" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="090205102403580" id="rfiletypeid" type="hidden">
+					    <input name="title" value="关于下发中国邮政集团公司吉林省分公司机关差旅费管理办法的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+					<tr id="15072386110904563742" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15072286080830292742">
+					
+					<td>
+						4
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="关于转发中央第六巡视组专项巡视中国邮政集团公司工作动员会领导讲话的通知" id="title" type="hidden">
+					    <input name="recordid" value="15072286080830292742" id="recordid" type="hidden">
+					    <input name="filetypeid" value="090205102403580" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司部室收文
+					</td>
+					
+					<td>
+						关于转发中央第六巡视组专项巡视中国邮政集团公司工作动员会领导讲话的通知
+					</td>
+					
+					<td>
+				       吉邮分党组〔2015〕20号
+					</td>
+					
+					<td>
+					    2015-07-23 09:04:56
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室相关人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15072386110904563742" type="checkbox">
+						<input name="recordid" value="15072286080830292742" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="090205102403580" id="rfiletypeid" type="hidden">
+					    <input name="title" value="关于转发中央第六巡视组专项巡视中国邮政集团公司工作动员会领导讲话的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+					<tr class="odd" id="15072385120904385714" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15072284060828034101">
+					
+					<td>
+						5
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="转发关于对中国邮政速递物流股份有限公司所属单位三起典型违纪问题和黑龙江省分公司等邮政企业严重违反财经纪律私设“小金库”的通报的通知" id="title" type="hidden">
+					    <input name="recordid" value="15072284060828034101" id="recordid" type="hidden">
+					    <input name="filetypeid" value="090205102403580" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司部室收文
+					</td>
+					
+					<td>
+						转发关于对中国邮政速递物流股份有限公司所属单位三起典型违纪问题和黑龙江省分公司等邮政企业严重违反财经纪律私设“小金库”的通报的通知
+					</td>
+					
+					<td>
+				       吉邮分纪监〔2015〕4号
+					</td>
+					
+					<td>
+					    2015-07-23 09:04:38
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室相关人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15072385120904385714" type="checkbox">
+						<input name="recordid" value="15072284060828034101" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="090205102403580" id="rfiletypeid" type="hidden">
+					    <input name="title" value="转发关于对中国邮政速递物流股份有限公司所属单位三起典型违纪问题和黑龙江省分公司等邮政企业严重违反财经纪律私设“小金库”的通报的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+					<tr id="15072284140927413934" url="/archives/swAction!viewAndEdit.action?yzArchivesIn.viewStatus=view&amp;yzArchivesIn.inId=15072284070830288636">
+					
+					<td>
+						6
+					</td>
+					
+					<td>
+						<img src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/voucher.gif" title="点击可查看流程痕迹" name="checkflowlog" align="top" height="16" width="16">
+					    <input name="title" value="关于成立中国邮政集团公司吉林省分公司ERP工程建设项目小组的通知" id="title" type="hidden">
+					    <input name="recordid" value="15072284070830288636" id="recordid" type="hidden">
+					    <input name="filetypeid" value="090205102403580" id="filetypeid" type="hidden">
+					</td>
+					 
+					<td>
+						吉林省分公司部室收文
+					</td>
+					
+					<td>
+						关于成立中国邮政集团公司吉林省分公司ERP工程建设项目小组的通知
+					</td>
+					
+					<td>
+				       吉邮分〔2015〕92号
+					</td>
+					
+					<td>
+					    2015-07-22 09:27:41
+					</td>
+					
+					<td style="line-height: 18px;" id="styletd">
+						部室相关人员阅办(高峰/吉林省信息技术局)
+					</td>
+					<td>
+						<input name="flowReadId" value="15072284140927413934" type="checkbox">
+						<input name="recordid" value="15072284070830288636" id="gongwenid" type="hidden">
+						<input name="filetypeid" value="090205102403580" id="rfiletypeid" type="hidden">
+					    <input name="title" value="关于成立中国邮政集团公司吉林省分公司ERP工程建设项目小组的通知" id="rtitle" type="hidden">
+					</td>
+					</tr>
+				
+				
+				
+			</tbody></table>
+			
+			   
+			   
+			   
+			   
+			   
+	 		<div class="page"><div class="message">共<i class="blue">6</i>条记录，当前显示第&nbsp;<i class="blue">1/1&nbsp;</i>页</div><ul class="paginList"><li class="paginItem"><a href="https://10.3.15.203/archives/gongwenCommonAction%21doList.action?bean.pageNo=1&amp;queryCondition.gongwenType=SW&amp;model_id=030004004">1</a></li></ul></div>  
+		</form>
+
+
+
+
+		<script type="text/javascript">
+			$('.tablelist tbody tr:odd').addClass('odd');
+			//去掉空格			
+			String.prototype.trim=function(){return this.replace(/(^\s*)|(\s*$)/g, "");} 
+			$.each($('.tablelist tbody tr').find("#styletd"),function(index,o){
+ 			     var nowStateV = $(o).text();
+ 			     if(nowStateV!='' && nowStateV.trim().length>15){
+ 			               $(o).css("line-height","18px");
+ 			     } else {
+ 			              $(o).css("line-height","33px");
+ 			     }
+			})
+			
+			var orderAD = $("#orderAD").val();
+			var cells = $("#cells").val();
+			var imgStr;
+			if (orderAD == 'asc') {
+				imgStr = "&nbsp;<img src='/images/sys_ico_open.gif'/>";
+			} else {
+				imgStr = "&nbsp;<img src='/images/sys_ico_close.gif'/>";
+			}
+			if(cells != '0')
+			 document.getElementById("listtable").rows[0].cells[cells].innerHTML = document.getElementById("listtable").rows[0].cells[cells].innerHTML + imgStr;
+			
+		</script>
+		</div>
+		</div>
+	
+<div style="position: absolute; top: -1970px; left: -1970px;" id="_my97DP"><iframe style="width: 186px; height: 198px;" src="%E5%B7%B2%E5%8A%9E%E5%88%97%E8%A1%A8_files/My97DatePicker.htm" border="0" scrolling="no" frameborder="0"></iframe></div></body></html>

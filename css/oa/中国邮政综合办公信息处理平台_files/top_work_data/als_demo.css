@@ -1,0 +1,78 @@
+
+/********************************
+ * generic als elements styling
+ ********************************/
+.als-container {
+	position: absolute;
+	left:300px;
+	float:left;
+}
+/*'the button of prev*/
+.als-prev {
+	width: 30px;
+	height:88px;	
+	position: relative;
+	cursor: pointer; 
+	float:left;
+	display: block;
+	text-align:center;
+	vertical-align: middle;
+}
+
+.als-prev img {
+    top:32px;	
+	position: relative;
+	margin-bottom: 1px;
+	display:inline-block; 
+	text-align:center;
+	vertical-align: middle;
+}
+ 
+/*the list of ul*/
+.als-viewport {	
+	position: relative;
+	overflow: hidden;
+	margin: 0px auto;
+	float:left;	
+	text-align:center;
+	vertical-align:middle;
+	z-index:12px;
+}
+
+.als-wrapper {	
+	position: relative;
+	list-style: none;
+	min-height: 88px;
+}
+
+.als-item {	
+	position: relative;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	float: left; 
+	margin: 0px;
+	min-height: 88px;
+	min-width: 87px;
+}
+
+.als-item img {	
+	position: relative;
+	vertical-align: middle;
+	margin-bottom: 1px;
+	 display:inline-block; 
+	text-align:center; 
+}
+
+ .als-next {
+	width: 30px;
+	min-height: 88px;	
+	position: relative;
+	cursor: pointer; 
+	float:left
+}
+.als-next img {
+    margin-top:32px;	
+	position: relative;
+}
+

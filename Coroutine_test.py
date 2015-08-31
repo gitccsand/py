@@ -7,9 +7,10 @@ __author__='lhw'
 import pdb
 
 def consumer():
+    pdb.set_trace()
     r = ''
     while True:
-        pdb.set_trace()
+##        pdb.set_trace()
         n = yield r
         if not n:
             return
@@ -20,6 +21,7 @@ def consumer():
 def produce(c):
 ##    pdb.set_trace()
     c.send(None)
+    pdb.set_trace()
     m = 0
     while m < 5:
 ##        pdb.set_trace()

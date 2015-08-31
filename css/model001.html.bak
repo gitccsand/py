@@ -1,0 +1,496 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" mrc="text/html; charset=gb2312">
+<title>类似Windows风格的导航菜单，CSS+JavaScript实现</title>
+</head>
+<body>
+<STYLE type=text/css>#menubar {
+        BACKGROUND: rgb(212,208,200); FONT: menu; CURSOR: default; POSITION: relative
+}
+#menubar .root {
+        BORDER-RIGHT: rgb(212,208,200) 1px solid; PADDING-RIGHT: 2pt; BORDER-TOP: rgb(212,208,200) 1px solid; PADDING-LEFT: 2pt; BORDER-LEFT: rgb(212,208,200) 1px solid; BORDER-BOTTOM: rgb(212,208,200) 1px solid
+}
+#menubar TABLE {
+        BORDER-RIGHT: #000000 1px solid; PADDING-RIGHT: 1pt; BORDER-TOP: #000000 1px solid; DISPLAY: none; PADDING-LEFT: 1pt; BACKGROUND: #ffffff; PADDING-BOTTOM: 0pt; MARGIN: 0pt; FONT: menu; BORDER-LEFT: #000000 1px solid; PADDING-TOP: 0pt; BORDER-BOTTOM: #000000 1px solid; POSITION: absolute
+}
+#menubar TABLE TD {
+        PADDING-RIGHT: 15pt; PADDING-LEFT: 12pt; PADDING-BOTTOM: 2pt; MARGIN: 0pt; PADDING-TOP: 2pt
+}
+#menubar .highlight {
+        BACKGROUND: #b5bed6; COLOR: 000000;
+
+}
+#menubar .disabledhighlight {
+        BACKGROUND: rgb(212,208,200); COLOR: gray
+}
+#menubar #break {
+        COLOR: gray
+}
+#menubar .disabled {
+        COLOR: gray
+}
+#menubar #break {
+        PADDING-RIGHT: 0pt; PADDING-LEFT: 0pt; PADDING-BOTTOM: 0pt; MARGIN: 0pt; PADDING-TOP: 0pt
+}
+#menubar SPAN.more {
+        PADDING-RIGHT: 0pt; PADDING-LEFT: 0pt; LEFT: 14pt; FLOAT: right; PADDING-BOTTOM: 0pt; MARGIN: 0pt; FONT: 9pt webdings; WIDTH:0.8em; PADDING-TOP: 0pt; POSITION: relative; TOP: -2pt; HEIGHT: 9pt
+}
+#menubar .TBHandle {
+    BACKGROUND-COLOR: menu;
+    BORDER-LEFT: buttonhighlight 1px solid;
+    BORDER-RIGHT: buttonshadow 1px solid;
+    BORDER-TOP:        buttonhighlight        1px solid;
+    FONT-SIZE: 1px;
+    HEIGHT: 50px;
+    POSITION: absolute;
+    TOP: 1px;
+    WIDTH: 3px
+}
+#menubar .yToolbar {
+    BACKGROUND-COLOR: menu;
+    BORDER-BOTTOM: buttonshadow        1px solid;
+    BORDER-LEFT: buttonhighlight 1px solid;
+    BORDER-RIGHT: buttonshadow 1px solid;
+    BORDER-TOP:        buttonhighlight        1px solid;
+    HEIGHT: 27px;
+    LEFT: 1px;
+    POSITION: relative;
+    TOP: 1px;
+}
+.handbtn {
+        BACKGROUND: buttonface; BORDER-BOTTOM: buttonshadow 1px solid; BORDER-LEFT: buttonhighlight 1px solid; BORDER-RIGHT: buttonshadow 1px solid; BORDER-TOP: buttonhighlight 1px solid; HEIGHT: 21px; WIDTH: 3px
+}
+.sepbtn1 {
+        BORDER-LEFT: buttonshadow 1px ridge; BORDER-RIGHT: buttonhighlight 1px solid; WIDTH: 2px
+}
+
+</STYLE>
+<BODY topmargin="0" leftmargin="0" bgcolor="rgb(212,208,200)">
+<div align="center">
+<script language=javascript>
+
+OutBarFolder1=new Array(
+"网页代码",
+
+"none","default","网页代码","http://169.254.212.61","_top"
+);
+OutBarFolder2=new Array(
+"最酷特效",
+
+"none","default","最酷特效","http://","_top"
+);
+OutBarFolder3=new Array(
+"网页代码",
+
+"none","default","网页代码","http://","_top"
+);
+OutBarFolder4=new Array(
+"网页代码",
+
+"none","default","网页代码","http://","_top"
+);
+OutBarFolder5=new Array(
+"网页代码",
+
+"none","default","网页代码","http://","_top"
+);
+
+        var childActive = null
+    var menuActive = null
+    var lastHighlight = null
+    var active = false
+    function getReal(el) {
+     temp = el
+      while ((temp!=null) && (temp.tagName!="TABLE") && (temp.className!="root") && (temp.id!="menuBar")) {
+        if (temp.tagName=="TD")
+          el = temp
+        temp = temp.parentElement
+      }
+      return el
+    }
+    function raiseMenu(el) {
+      el.style.borderLeft = "1px #08246B solid"
+      el.style.borderTop = "1px #08246B solid"
+      el.style.borderRight = "1px #08246B solid"
+      el.style.borderBottom = "1px #08246B solid"
+      el.style.background = "#B5BED6"
+    }
+    function clearHighlight(el) {
+      if (el==null) return
+      el.style.borderRight = "1px lightgrey solid"
+      el.style.borderBottom = "1px lightgrey solid"
+      el.style.borderTop = "1px lightgrey solid"
+      el.style.borderLeft = "1px lightgrey solid"
+      el.style.background = "rgb(212,208,200)"
+    }
+    function sinkMenu(el) {
+      el.style.borderRight = "1px #EEEEEE solid"
+      el.style.borderBottom = "1px #EEEEEE solid"
+      el.style.borderTop = "1px gray solid"
+      el.style.borderLeft = "1px gray solid"
+      el.style.background = "rgb(212,208,200)"
+    }
+    function menuHandler(menuItem) {
+      return true
+    }
+    function getOffsetPos(which,el,tagName) {
+      var pos = 0
+      while (el.tagName!=tagName) {
+        pos+=el["offset" + which]
+        el = el.offsetParent
+      }
+      return pos
+    }
+
+    function getRootTable(el) {
+      el = el.offsetParent
+      if (el.tagName=="TR")
+        el = el.offsetParent
+      return el
+    }
+
+    function getElement(el,tagName) {
+      while ((el!=null) && (el.tagName!=tagName) )
+        el = el.parentElement
+      return el
+    }
+
+    function processClick() {
+      var el = getReal(event.srcElement)
+      if ((getRootTable(el).id=="menuBar") && (active)) {
+        cleanupMenu(menuActive)
+        clearHighlight(menuActive)
+        active=false
+        lastHighlight=null
+        doHighlight(el)
+      }
+      else {
+        if ((el.className=="root") || (!menuHandler(el)))
+          doMenuDown(el)
+        else {
+          if (el._childItem==null)
+            el._childItem = getChildren(el)
+          if (el._childItem!=null)  return;
+          if ((el.id!="break") && (el.className!="disabled") && (el.className!="disabledhighlight") && (el.className!="clear"))  {
+            if (menuHandler(el)) {
+              cleanupMenu(menuActive)
+              clearHighlight(menuActive)
+              active=false
+              lastHighlight=null
+            }
+          }
+        }
+      }
+    }
+    function getChildren(el) {
+      var tList = el.children.tags("TABLE")
+      var i = 0
+      while ((i<tList.length) && (tList[i].tagName!="TABLE"))
+        i++
+      if (i==tList.length)
+        return null
+      else
+        return tList[i]
+    }
+    function doMenuDown(el) {
+      if (el._childItem==null)
+        el._childItem = getChildren(el)
+      if ((el._childItem!=null) && (el.className!="disabled") && (el.className!="disabledhighlight")) {
+        ch = el._childItem
+        if (ch.style.display=="block") {
+          removeHighlight(ch.active)
+          return
+        }
+        ch.style.display = "block"
+        if (el.className=="root") {
+          ch.style.pixelTop = el.offsetHeight + el.offsetTop + 2
+          ch.style.pixelLeft = el.offsetLeft + 1
+          if (ch.style.pixelWidth==0)
+            ch.style.pixelWidth = ch.rows[0].offsetWidth+50
+          sinkMenu(el)
+          active = true
+          menuActive = el
+        } else {
+          childActive = el
+          ch.style.pixelTop = getOffsetPos("Top",el,"TABLE") -3
+          ch.style.pixelLeft = el.offsetLeft + el.offsetWidth
+          if (ch.style.pixelWidth==0)
+            ch.style.pixelWidth = ch.offsetWidth+50
+        }
+      }
+    }
+     function doHighlight(el) {
+      el = getReal(el)
+      if ("root"==el.className) {
+        if ((menuActive!=null) && (menuActive!=el)) {
+          clearHighlight(menuActive)
+        }
+        if (!active) {
+          raiseMenu(el)
+        }
+        else
+          sinkMenu(el)
+        if ((active) && (menuActive!=el)) {
+          cleanupMenu(menuActive)
+          doMenuDown(el)
+        }
+        menuActive = el
+        lastHighlight=null
+      }
+      else {
+        if (childActive!=null)
+          if (!childActive.contains(el))
+            closeMenu(childActive, el)
+
+        if (("TD"==el.tagName) && ("clear"!=el.className)) {
+          var ch = getRootTable(el)
+          if (ch.active!=null) {
+            if (ch.active!=el) {
+              if (ch.active.className=="disabledhighlight")
+                ch.active.className="disabled"
+              else
+                ch.active.className=""
+              }
+            }
+          ch.active = el
+          lastHighlight = el
+          if ((el.className=="disabled") || (el.className=="disabledhighlight") || (el.id=="break"))
+            el.className = "disabledhighlight"
+          else {
+            if (el.id!="break") {
+              el.className = "highlight"
+              if (el._childItem==null)
+                el._childItem = getChildren(el)
+              if (el._childItem!=null) {
+                doMenuDown(el)
+              }
+            }
+          }
+        }
+      }
+    }
+    function removeHighlight(el) {
+      if (el!=null)
+        if ((el.className=="disabled") || (el.className=="disabledhighlight"))
+          el.className="disabled"
+        else
+          el.className=""
+    }
+    function cleanupMenu(el) {
+      if (el==null) return
+      for (var i = 0; i < el.all.length; i++) {
+        var item = el.all[i]
+        if (item.tagName=="TABLE")
+         item.style.display = ""
+        removeHighlight(item.active)
+        item.active=null
+      }
+    }
+    function closeMenu(ch, el) {
+      var start = ch
+      while (ch.className!="root") {
+          ch = ch.parentElement
+          if (((!ch.contains(el)) && (ch.className!="root"))) {
+            start=ch
+          }
+      }
+      cleanupMenu(start)
+    }
+     function checkMenu() {
+      if (document.all.menuBar==null) return
+      if ((!document.all.menuBar.contains(event.srcElement)) && (menuActive!=null)) {
+        clearHighlight(menuActive)
+        closeMenu(menuActive)
+        active = false
+        menuActive=null
+        choiceActive = null
+      }
+    }
+    function doCheckOut() {
+      var el = event.toElement
+      if ((!active) && (menuActive!=null) && (!menuActive.contains(el))) {
+        clearHighlight(menuActive)
+        menuActive=null
+      }
+    }
+
+    function processKey() {
+      if (active) {
+        switch (event.keyCode) {
+         case 13: lastHighlight.click(); break;
+         case 39:
+           if ((lastHighlight==null) || (lastHighlight._childItem==null)) {
+             var idx = menuActive.cellIndex
+             if (idx==getElement(menuActive,"TR").cells.length-2)
+               idx = 0
+             else
+               idx++
+             newItem = getElement(menuActive,"TR").cells[idx]
+           } else
+           {
+             newItem = lastHighlight._childItem.rows[0].cells[0]
+           }
+           doHighlight(newItem)
+           break;
+         case 37:
+           if ((lastHighlight==null) || (getElement(getRootTable(lastHighlight),"TR").id=="menuBar")) {
+             var idx = menuActive.cellIndex
+             if (idx==0)
+               idx = getElement(menuActive,"TR").cells.length-2
+             else
+               idx--
+             newItem = getElement(menuActive,"TR").cells[idx]
+           } else
+           {
+             newItem = getElement(lastHighlight,"TR")
+             while (newItem.tagName!="TD")
+               newItem = newItem.parentElement
+           }
+           doHighlight(newItem)
+           break;
+         case 40:
+            if (lastHighlight==null) {
+              itemCell = menuActive._childItem
+              curCell=0
+              curRow = 0
+            }
+            else {
+              itemCell = getRootTable(lastHighlight)
+              if (lastHighlight.cellIndex==getElement(lastHighlight,"TR").cells.length-1) {
+                curCell = 0
+                curRow = getElement(lastHighlight,"TR").rowIndex+1
+                if (getElement(lastHighlight,"TR").rowIndex==itemCell.rows.length-1)
+                  curRow = 0
+              } else {
+                curCell = lastHighlight.cellIndex+1
+                curRow = getElement(lastHighlight,"TR").rowIndex
+              }
+            }
+            doHighlight(itemCell.rows[curRow].cells[curCell])
+            break;
+         case 38:
+            if (lastHighlight==null) {
+              itemCell = menuActive._childItem
+              curRow = itemCell.rows.length-1
+              curCell= itemCell.rows[curRow].cells.length-1
+            }
+            else {
+              itemCell = getRootTable(lastHighlight)
+              if (lastHighlight.cellIndex==0) {
+                curRow = getElement(lastHighlight,"TR").rowIndex-1
+                if (curRow==-1)
+                  curRow = itemCell.rows.length-1
+                curCell= itemCell.rows[curRow].cells.length-1
+
+              } else {
+                curCell = lastHighlight.cellIndex - 1
+                curRow = getElement(lastHighlight,"TR").rowIndex
+              }
+            }
+            doHighlight(itemCell.rows[curRow].cells[curCell])
+            break;
+           if (lastHighlight==null) {
+              curCell = menuActive._childItem
+              curRow = curCell.rows.length-1
+            }
+            else {
+              curCell = getRootTable(lastHighlight)
+              if (getElement(lastHighlight,"TR").rowIndex==0)
+                curRow = curCell.rows.length-1
+              else
+                curRow = getElement(lastHighlight,"TR").rowIndex-1
+            }
+            doHighlight(curCell.rows[curRow].cells[0])
+            break;
+        }
+      }
+    }
+function make_menu() {
+document.write("<table width='740px' cellpadding='0' cellspacing='0' border='0' style='background=ffffff; BACKGROUND: buttonface; BORDER-BOTTOM: buttonshadow 1px solid; BORDER-LEFT: buttonhighlight 1px solid; BORDER-RIGHT: buttonshadow 1px solid; BORDER-TOP: buttonhighlight 1px solid;'>");
+document.write("<tr><TD><SPAN class=handbtn></SPAN></TD><td>");
+document.write("<TABLE ID=menuBar ONSELECTSTART='return false' ONCLICK='processClick()' ONMOUSEOVER='doHighlight(event.toElement)' ONMOUSEOUT='doCheckOut()' ONKEYDOWN='processKey()'><TR>");
+        j=1;
+        while(eval("window.OutBarFolder"+j))
+                j++;
+        i=1;
+        while(i<j)
+        {
+                Folder=eval("OutBarFolder"+i)
+        document.write("<TD NOWRAP CLASS=root>"+Folder[0]+"<TABLE CELLSPACING=0 CELLPADDING=0>");
+                MakeItems(Folder);
+        document.write("</TABLE>");
+                i++;
+        }
+document.write("</TD></TR></TABLE>");
+document.write("</td><td width=100% ONMOUSEOVER='processClick()'></td></tr></table>");
+}
+function MakeItems(Folder)
+{
+        var items=0;
+        while(Folder[items+1])
+                items+=5;
+        items/=5;
+        for(var i=1;i<items*5;i+=5)
+        {
+/*
+                if(Folder[i+1]=="BREAK") {
+                        document.write("<TD NOWRAP ID=break><HR></TD>");
+                }
+                else {
+                        document.write("<TR><TD NOWRAP>"+Folder[i+1]+"</TD></TR>");
+                }
+*/
+                        document.write("<TR><TD NOWRAP"+((Folder[i+0]=="none")?"":" ID='"+Folder[i+0]+"'")+((Folder[i+3]=="none")?"":" onclick=\"go(1,'"+Folder[i+3]+"')\"")+">"+((Folder[i+1]=="default")?"":"<font color="+Folder[i+1]+">")+Folder[i+2]+((Folder[i+1]=="default")?"":"</font>")+"</TD></TR>");
+//alert("<TR><TD NOWRAP "+((Folder[i+0]=="none")?"":"ID='"+Folder[i+0]+"'")+((Folder[i+3]=="none")?"":" onclick=go(1,'"+Folder[i+3]+"')")+">"+((Folder[i+1]=="default")?"":"<font color="+Folder[i+1]+">")+Folder[i+2]+((Folder[i+1]=="default")?"":"</font>")+"</TD></TR>");
+        }
+}
+
+function go(i,iurl) {
+        switch (i)
+        {
+                case 1 : parent.location=iurl;break;
+                case 2 : top.main.location='/';break;
+                case 3 : top.main.location='/';break;
+                case 4 : top.main.location='/';break;
+                case 5 : top.main.location='/';break;
+                case 6 :
+                        var obj=top.main
+                        var str=obj.location.href;
+                        if(str.indexOf("index1")>0)
+                                obj.location="index1.asp?page="+obj.document.all("ppage").value;
+                        else
+                                obj.location="/";
+                        break;
+                case 7 :
+                        var obj=top.main
+                        var str=obj.location.href;
+                        if(str.indexOf("index1")>0)
+                                obj.location="index1.asp?page="+obj.document.all("npage").value;
+                        else
+                                obj.location="/";
+                        break;
+                case 8 :
+                        var obj=top.main
+                        var str=obj.location.href;
+                        if(str.indexOf("index1")>0)
+                                obj.location="index1.asp?page="+obj.document.all("epage").value;
+                        else
+                                obj.location="index1.asp";
+                        break;
+                case 9: top.main.location='editinfo.asp';break;
+                case 10: top.main.location='quit.asp';break;
+                case 11: top.main.location='userinfo.asp';break;
+                case 12:
+                        var newwin=top.open("http://www.mb5u.com/jscss/");
+                        newwin.focus();
+                        break;
+        }
+}
+
+make_menu();
+</script>
+</div>
+<div style='width:100%;height:94%' ONMOUSEOVER='processClick()'>
+</div>
+</body>
+</html>

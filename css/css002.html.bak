@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> css 001 </TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<link rel="stylesheet" href="css002.css" type="text/css"/>
+</HEAD>
+
+<BODY>
+<p><strong>我是粗体字，不是斜体字，因为我不在列表当中，所以这个规则对我不起作用</strong></p>
+
+<ol>
+<li><strong>我是斜体字。这是因为 strong 元素位于 li 元素内。</strong></li>
+<li>我是正常的字体。</li>
+</ol>
+
+<p>The strongly emphasized word in this paragraph is<strong>red</strong>.</p>
+<h2>This subhead is also red.</h2>
+<h2>The strongly emphasized word in this subhead is<strong>blue</strong>.</h2>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <meta charset="UTF-8">
+
+  <title>HTML5/CSS3带日期区间的日期选择插件演示地址</title>
+
+    <link rel="stylesheet" href="HTML5_CSS3%E5%B8%A6%E6%97%A5%E6%9C%9F%E5%8C%BA%E9%97%B4%E7%9A%84%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E6%8F%92%E4%BB%B6%E6%BC%94%E7%A4%BA%E5%9C%B0%E5%9D%80_files/style.css" media="screen" type="text/css">
+
+</head>
+
+<body>
+
+  
+<div id="wrapper">
+  <form>
+    <div style="display: none;" class="drp-popup">
+  <div class="drp-timeline">
+    <ul class="drp-timeline-presets"><li class="">7 Days<div class="drp-button"></div></li><li class="">30 Days<div class="drp-button"></div></li><li class="">90 Days<div class="drp-button"></div></li><li class="">180 Days<div class="drp-button"></div></li><li class="">365 Days<div class="drp-button"></div></li><li class="drp-selected">Custom<div class="drp-button"></div></li></ul>
+    <div class="drp-timeline-bar"></div>
+  </div>
+  <div class="drp-calendars">
+    <div class="drp-calendar drp-calendar-start">
+      <div class="drp-month-picker">
+        <div class="drp-arrow">&lt;</div>
+        <div class="drp-month-title">May 2015</div>
+        <div class="drp-arrow drp-arrow-right">&gt;</div>
+      </div>
+      <ul class="drp-day-headers"><li>Su</li><li>Mo</li><li>Tu</li><li>We</li><li>Th</li><li>Fr</li><li>Sa</li></ul>
+      <ul class="drp-days"><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day ">1</li><li class="drp-day  drp-day-last-in-row">2</li><li class="drp-day ">3</li><li class="drp-day ">4</li><li class="drp-day ">5</li><li class="drp-day ">6</li><li class="drp-day ">7</li><li class="drp-day ">8</li><li class="drp-day  drp-day-last-in-row">9</li><li class="drp-day ">10</li><li class="drp-day ">11</li><li class="drp-day ">12</li><li class="drp-day ">13</li><li class="drp-day ">14</li><li class="drp-day ">15</li><li class="drp-day  drp-day-last-in-row">16</li><li class="drp-day ">17</li><li class="drp-day ">18</li><li class="drp-day ">19</li><li class="drp-day ">20</li><li class="drp-day ">21</li><li class="drp-day ">22</li><li class="drp-day  drp-day-last-in-row">23</li><li class="drp-day ">24</li><li class="drp-day ">25</li><li class="drp-day ">26</li><li class="drp-day ">27</li><li class="drp-day ">28</li><li class="drp-day ">29</li><li class="drp-day drp-day-selected drp-day-last-in-row">30</li><li class="drp-day drp-day-in-range drp-day-last-in-row">31</li></ul>
+      <div class="drp-calendar-date">5/30/2015</div>
+    </div>
+    <div class="drp-calendar-separator"></div>
+    <div class="drp-calendar drp-calendar-end">
+      <div class="drp-month-picker">
+        <div class="drp-arrow">&lt;</div>
+        <div class="drp-month-title">August 2015</div>
+        <div class="drp-arrow drp-arrow-right">&gt;</div>
+      </div>
+      <ul class="drp-day-headers"><li>Su</li><li>Mo</li><li>Tu</li><li>We</li><li>Th</li><li>Fr</li><li>Sa</li></ul>
+      <ul class="drp-days"><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-empty"></li><li class="drp-day drp-day-in-range drp-day-last-in-row">1</li><li class="drp-day drp-day-in-range">2</li><li class="drp-day drp-day-in-range">3</li><li class="drp-day drp-day-in-range">4</li><li class="drp-day drp-day-in-range">5</li><li class="drp-day drp-day-in-range">6</li><li class="drp-day drp-day-in-range">7</li><li class="drp-day drp-day-in-range drp-day-last-in-row">8</li><li class="drp-day drp-day-in-range">9</li><li class="drp-day drp-day-in-range">10</li><li class="drp-day drp-day-in-range">11</li><li class="drp-day drp-day-in-range">12</li><li class="drp-day drp-day-in-range">13</li><li class="drp-day drp-day-in-range">14</li><li class="drp-day drp-day-in-range drp-day-last-in-row">15</li><li class="drp-day drp-day-in-range">16</li><li class="drp-day drp-day-in-range">17</li><li class="drp-day drp-day-in-range">18</li><li class="drp-day drp-day-in-range">19</li><li class="drp-day drp-day-selected">20</li><li class="drp-day ">21</li><li class="drp-day  drp-day-last-in-row">22</li><li class="drp-day ">23</li><li class="drp-day ">24</li><li class="drp-day ">25</li><li class="drp-day ">26</li><li class="drp-day ">27</li><li class="drp-day ">28</li><li class="drp-day  drp-day-last-in-row">29</li><li class="drp-day ">30</li><li class="drp-day  drp-day-last-in-row">31</li></ul>
+      <div class="drp-calendar-date">8/20/2015</div>
+    </div>
+  </div>
+  <div class="drp-tip"></div>
+</div><select tabindex="-1" class="custom-date" name="select">
+      <option value="7">7 Days</option>
+      <option value="30">30 Days</option>
+      <option value="90">90 Days</option>
+      <option value="180">180 Days</option>
+      <option value="365">365 Days</option>
+      <option selected="selected" value="custom">5/30/15 - 8/20/15</option>
+    </select>
+  </form>
+</div>
+  <script src="HTML5_CSS3%E5%B8%A6%E6%97%A5%E6%9C%9F%E5%8C%BA%E9%97%B4%E7%9A%84%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E6%8F%92%E4%BB%B6%E6%BC%94%E7%A4%BA%E5%9C%B0%E5%9D%80_files/jquery.js"></script>
+
+  <script src="HTML5_CSS3%E5%B8%A6%E6%97%A5%E6%9C%9F%E5%8C%BA%E9%97%B4%E7%9A%84%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E6%8F%92%E4%BB%B6%E6%BC%94%E7%A4%BA%E5%9C%B0%E5%9D%80_files/index.js"></script>
+
+
+
+</body></html>
