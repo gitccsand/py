@@ -1,0 +1,20 @@
+body  {
+     font-family: Verdana, sans-serif;
+     }
+p.red1 {text-align:center; color:red;}	
+p.red2 { color: #800; text-align:left }
+p.serif{
+	font-family:"Times New Roman",Georgia,Serif;
+	text-align:center; 
+	color:red;
+	}
+p.sansserif{
+	font-family:Arial,Verdana,Sans-serif; 
+	text-align:left;
+	color: #800;
+	}
+
+h1,h2,h3 {
+  color: green;
+  }
+

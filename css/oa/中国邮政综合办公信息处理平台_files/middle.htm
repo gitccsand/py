@@ -1,0 +1,35 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>New Page 3</title>
+<link href="top_work_data/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="top_work_data/jquery-1.js"></script>
+<script>
+var flag='max';
+function setmax(){
+  var frmObj = parent.document.getElementById("frameset2");
+  if(flag=='max'){
+	flag='min';
+	frmObj.cols="0px,9px,*";
+	$("#img").attr("src","/images/common/show_25.jpg");
+  }else{
+	flag='max';
+	frmObj.cols="187px,9px,*";
+	$("#img").attr("src","/images/common/show_24.jpg");
+  }
+}
+</script>
+</head>
+<body onclick="setmax()" style="cursor:pointer;margin:0px auto;">
+<table align="left" height="100%" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+  <tr>
+    <td class="zd_bj" height="45%" valign="top"></td></tr>
+  <tr>
+    <td class="zd_bj" height="10%" valign="middle"><img id="img" src="middle_data/show_24.jpg" height="41" border="0" width="9"></td></tr>
+  <tr>
+    <td class="zd_bj" height="45%" valign="bottom">&nbsp;</td></tr></tbody>
+</table>
+
+
+
+</body></html>
