@@ -4,7 +4,17 @@
 
 __author__='lhw'
 
+def upper_attr(future_class_name,future_class_parents,future_class_attrs):
+
+    attrs=((name,value) for name,value in future_class_attrs.items() if not name.startwith('__'))
+    uppercase_attrs = dict((name.upper(),value) for name,value in attrs)
+    print(uppercase_attrs)
+    return type(future_class_name,future_class_parents,uppercase_attrs)
+
+##__metaclass__=upper_attr
+
 class Field(object):
+    
     def __init__(self,name,column_type):
 	    self.name=name
 	    self.column_type=column_type
@@ -23,15 +33,18 @@ class IntegerField(Field):
 
 
 
-def main():
-    pass
-    
-    
 
-    
-    
+def main():
+    name=StringField('Robin')
+    name.hello()
+    print(hasattr(name,'name'))
+
 
 if __name__=='__main__':
     main()
 
+    
+    
+
+    
     
