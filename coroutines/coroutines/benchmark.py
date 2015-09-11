@@ -25,7 +25,8 @@ def grep(pattern,target):
 # A null-sink to send data
 @coroutine
 def null(): 
-    while True: item = (yield)
+    while True:
+        item = (yield)
 
 # A benchmark
 line = 'python is nice'
@@ -34,8 +35,8 @@ p2   = GrepHandler('python',null())   # Object
 
 from timeit import timeit
 
-print "coroutine:", timeit("p1.send(line)",
-                          "from __main__ import line, p1")
+print ("coroutine:", timeit("p1.send(line)",
+                          "from __main__ import line, p1"))
 
-print "object:", timeit("p2.send(line)",
-                        "from __main__ import line, p2")
+print ("object:", timeit("p2.send(line)",
+                        "from __main__ import line, p2"))

@@ -14,7 +14,7 @@ def follow(thefile):
         yield line
         
 if __name__=='__main__':
-    logfile=open('./access-log')
+    logfile=open('./access-log','r')
     for line in follow(logfile):
         print(line)
 
