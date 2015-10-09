@@ -36,8 +36,7 @@ def filter_on_field(fieldname,value,target):
 def bus_locations():
     while True:
         bus = (yield)
-        print "%(route)s,%(id)s,\"%(direction)s\","\
-              "%(latitude)s,%(longitude)s" % bus 
+        print ("%(route)s,%(id)s,\"%(direction)s\",\"%(latitude)s\",%(longitude)s,%(finalStop)s" % bus )
 
 # Example 
 if __name__ == '__main__':
@@ -45,9 +44,15 @@ if __name__ == '__main__':
     from cosax import EventHandler
 
     xml.sax.parse("allroutes.xml",
-              EventHandler(
+                  EventHandler(
                    buses_to_dicts(
-                   filter_on_field("route","22",
-                   filter_on_field("direction","North Bound",
-                   bus_locations())))
-              ))
+                       filter_on_field("direction","North Bound",
+                   bus_locations()))
+                   ))
+                   
+##              EventHandler(
+##                   buses_to_dicts(
+##                   filter_on_field("route","22",
+##                   filter_on_field("direction","North Bound",
+##                   bus_locations())))
+##              ))
