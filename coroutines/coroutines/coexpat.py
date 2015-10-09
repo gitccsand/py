@@ -8,14 +8,11 @@ import xml.parsers.expat
 def expat_parse(f,target):
     
     parser = xml.parsers.expat.ParserCreate()
-    parser.returns_unicode=False
+##    parser.returns_unicode=False
     parser.buffer_size = 65536
     parser.buffer_text = True
-<<<<<<< HEAD
-##    parser.returns_unicode = False
-=======
+
 ##    parser.returns_unicode = True
->>>>>>> 7c25823582ec810a33ac46c360ea31279fb546ba
     parser.StartElementHandler = \
        lambda name,attrs: target.send(('start',(name,attrs)))
     parser.EndElementHandler = \
@@ -29,11 +26,8 @@ def expat_parse(f,target):
 if __name__ == '__main__':
     from buses import *
 
-<<<<<<< HEAD
     expat_parse(open("./allroutes.xml",'rb'),
-=======
-    expat_parse(open(".\\allroutes.xml"),
->>>>>>> 7c25823582ec810a33ac46c360ea31279fb546ba
+##    expat_parse(open(".\\allroutes.xml"),
             buses_to_dicts(
             filter_on_field("route","22",
             filter_on_field("direction","North Bound",

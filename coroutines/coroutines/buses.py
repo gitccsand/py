@@ -36,11 +36,11 @@ def filter_on_field(fieldname,value,target):
 def bus_locations():
     while True:
         bus = (yield)
-<<<<<<< HEAD
-        print ("%(route)s,%(id)s,\"%(direction)s\",\"%(latitude)s\",%(longitude)s,%(finalStop)s" % bus )
-=======
+##<<<<<<< HEAD
+##        print ("%(route)s,%(id)s,\"%(direction)s\",\"%(latitude)s\",%(longitude)s,%(finalStop)s" % bus )
+##=======
         print ("%(route)s,%(id)s,\"%(direction)s\",\"%(latitude)s,%(longitude)s" % bus )
->>>>>>> 7c25823582ec810a33ac46c360ea31279fb546ba
+##>>>>>>> 7c25823582ec810a33ac46c360ea31279fb546ba
 
 # Example 
 if __name__ == '__main__':
