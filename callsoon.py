@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-'metaclass'
-=======
-'multiprocessing'
->>>>>>> ce23cf5b06bc3150684ed2e7a56ae009fd2af93d
-=======
 'call_soon'
->>>>>>> 7c25823582ec810a33ac46c360ea31279fb546ba
 
 __author__='lhw'
 
