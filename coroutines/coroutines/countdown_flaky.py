@@ -15,7 +15,10 @@ def countdown(n):
 # Example use
 if __name__ == '__main__':
     c=countdown(10)
+##    c.send(100)
+    print(c.send(None))
+##    print(next(c))
     for n in c:
         if n==5:
-            c.send(3)
+            c.send(10)
         print(n)
