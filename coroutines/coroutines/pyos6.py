@@ -57,18 +57,21 @@ class Scheduler(object):
 
     def mainloop(self):
          while self.taskmap:
-            task = self.ready.get()
-            try:
-                result = task.run()
-                if isinstance(result,SystemCall):
-                    result.task  = task
-                    result.sched = self
-                    result.handle()
-                    continue
-            except StopIteration:
-                self.exit(task)
-                continue
-            self.schedule(task)
+             print(self.taskmap.items())
+             print(self.ready.qsize())
+             print(self.exit_waiting.items())
+             task = self.ready.get()
+             try:
+                 result = task.run()
+                 if isinstance(result,SystemCall):
+                     result.task  = task
+                     result.sched = self
+                     result.handle()
+                     continue
+             except StopIteration:
+                 self.exit(task)
+                 continue
+             self.schedule(task)
 
 # ------------------------------------------------------------
 #                   === System Calls ===
@@ -121,11 +124,17 @@ class WaitTask(SystemCall):
 # ------------------------------------------------------------
 #                      === Example ===
 # ------------------------------------------------------------
+import asyncio
+from asyncio import sleep
+##from time import sleep
 if __name__ == '__main__':
+    @asyncio.coroutine
     def foo():
         for i in range(5):
             print ("I'm foo")
+            sleep(20)
             yield
+            print('after sleep')
 
     def main():
         child = yield NewTask(foo())
