@@ -5,6 +5,7 @@
 *.rar
 *.zip
 *.pyc
+*.bak
 #directory
 WebContent/WEB-INF/lib
 gettingStarted/getZkUp/WebContent/WEB-INF/lib
